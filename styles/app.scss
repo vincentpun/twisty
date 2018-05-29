@@ -10,15 +10,3 @@ body, html, #app {
 #app > * {
   flex-basis: 100%;
 }
-
-.app-sidebar {
-  @extend .col-12;
-  @extend .col-lg-3;
-  @extend .shadow-sm;
-  padding-left: 0;
-  padding-right: 0;
-
-  @include media-breakpoint-up(lg) {
-    height: 100%;
-  }
-}
