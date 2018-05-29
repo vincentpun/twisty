@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderBar matches the snapshot 1`] = `
+<nav
+  className="navbar navbar-dark bg-primary"
+>
+  <span
+    className="navbar-brand"
+  />
+</nav>
+`;
