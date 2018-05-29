@@ -59,7 +59,7 @@
       "raf/polyfill"
     ],
     "snapshotSerializers": [
-      "enzyme-to-json"
+      "enzyme-to-json/serializer"
     ],
     "globals": {
       "ts-jest": {
