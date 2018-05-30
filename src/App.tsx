@@ -2,7 +2,7 @@ import * as React from 'react';
 import { hot } from 'react-hot-loader';
 
 import InputFormContainer from './components/InputForm';
-import AppSidebar from './components/AppSidebar/index';
+import AppSidebar from './components/AppSidebar';
 
 class App extends React.Component {
   render() {
