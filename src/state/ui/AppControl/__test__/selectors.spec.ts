@@ -13,7 +13,7 @@ describe('AppControl selectors', () => {
       },
     };
 
-    const pickSession = selectors.getPickSession(state);
+    const pickSession = selectors.getPickSession(state as State);
     expect(pickSession).toEqual(AppControlSession.StartingPoint);
   });
 });
