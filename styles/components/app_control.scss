@@ -29,11 +29,11 @@
   @at-root &__input-form {
     overflow: auto;
     padding: 1em;
+  }
 
-    @at-root &-section-label {
-      @extend small;
-      @extend .text-muted;
-      text-transform: uppercase;
-    }
+  @at-root &__section-label {
+    @extend small;
+    @extend .text-muted;
+    text-transform: uppercase;
   }
 }
