@@ -1,12 +1,14 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 
 interface HeaderBarProps {
   title: string;
+  className?: string;
 }
 
-const HeaderBar = ({ title }: HeaderBarProps) => (
-  <nav className="navbar navbar-dark bg-primary">
-    <span className="navbar-brand">{title}</span>
+const HeaderBar = ({ title, className }: HeaderBarProps) => (
+  <nav className={classNames('header-bar', className)}>
+    <span className="header-bar__title">{title}</span>
   </nav>
 );
 

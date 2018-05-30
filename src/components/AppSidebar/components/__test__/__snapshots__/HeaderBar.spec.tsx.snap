@@ -2,10 +2,10 @@
 
 exports[`HeaderBar matches the snapshot 1`] = `
 <nav
-  className="navbar navbar-dark bg-primary"
+  className="header-bar"
 >
   <span
-    className="navbar-brand"
+    className="header-bar__title"
   />
 </nav>
 `;

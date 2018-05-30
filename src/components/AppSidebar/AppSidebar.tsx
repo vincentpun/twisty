@@ -9,7 +9,7 @@ interface AppSidebarProps {
 
 const AppSidebar = ({ children, productName }: AppSidebarProps) => (
   <div className="app-sidebar">
-    <HeaderBar title={productName} />
+    <HeaderBar className="app-sidebar__header-bar" title={productName} />
     {children}
   </div>
 )
