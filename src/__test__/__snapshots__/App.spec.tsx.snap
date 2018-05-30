@@ -1,14 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App matches the snapshot 1`] = `
-<div
-  className="row no-gutters"
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
 >
-  <AppControl
-    productName="Twisty"
-  />
   <div
-    className="col"
-  />
-</div>
+    className="row no-gutters"
+  >
+    <AppControl
+      productName="Twisty"
+    />
+    <div
+      className="col"
+    />
+  </div>
+</Provider>
 `;

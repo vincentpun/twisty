@@ -2,8 +2,11 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './App';
+import { createReduxStore } from 'src/state/createReduxStore';
+
+const store = createReduxStore();
 
 ReactDOM.render(
-  <App />,
+  <App store={store} />,
   document.getElementById('app'),
 );
