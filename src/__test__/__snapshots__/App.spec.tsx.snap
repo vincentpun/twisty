@@ -4,11 +4,9 @@ exports[`App matches the snapshot 1`] = `
 <div
   className="row no-gutters"
 >
-  <AppSidebar
+  <AppControl
     productName="Twisty"
-  >
-    <InputFormContainer />
-  </AppSidebar>
+  />
   <div
     className="col"
   />

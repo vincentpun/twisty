@@ -2,10 +2,10 @@
 
 exports[`HeaderBar matches the snapshot 1`] = `
 <nav
-  className="header-bar"
+  className="app-control__header-bar"
 >
   <span
-    className="header-bar__title"
+    className="app-control__header-bar-title"
   />
 </nav>
 `;

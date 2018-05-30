@@ -1,0 +1,39 @@
+.app-control {
+  @extend .col-12;
+  @extend .col-lg-3;
+  @extend .shadow-sm;
+  padding-left: 0;
+  padding-right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 30%;
+
+  @include media-breakpoint-up(lg) {
+    height: 100%;
+  }
+
+  @at-root &__header-bar {
+    flex-shrink: 0;
+
+    @extend .navbar;
+    @extend .navbar-dark;
+    @extend .bg-primary;
+
+    @at-root &-title {
+      @extend .navbar-brand;
+    }
+  }
+
+  @at-root &__input-form {
+    overflow: auto;
+    padding: 1em;
+
+    @at-root &-section-label {
+      @extend small;
+      @extend .text-muted;
+      text-transform: uppercase;
+    }
+  }
+}

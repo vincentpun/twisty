@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 
-import InputFormContainer from './components/InputForm';
-import AppSidebar from './components/AppSidebar';
+import AppControl from './components/AppControl';
 
 class App extends React.Component {
   render() {
     return (
       <div className="row no-gutters">
-        <AppSidebar productName="Twisty">
-          <InputFormContainer />
-        </AppSidebar>
+        <AppControl productName="Twisty" />
         <div className="col">
         </div>
       </div>

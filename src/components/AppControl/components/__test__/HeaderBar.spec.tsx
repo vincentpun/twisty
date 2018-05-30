@@ -11,6 +11,6 @@ describe('HeaderBar', () => {
 
   it('renders the title', () => {
     const wrapper = shallow(<HeaderBar title="Hero" />);
-    expect(wrapper.find('.navbar-brand').text()).toEqual('Hero');
+    expect(wrapper.find('.app-control__header-bar-title').text()).toEqual('Hero');
   });
 });

@@ -1,9 +1,0 @@
-.input-form-container {
-  padding: 1em;
-
-  @at-root &__section-label {
-    @extend small;
-    @extend .text-muted;
-    text-transform: uppercase;
-  }
-}

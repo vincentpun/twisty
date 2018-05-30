@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppControl matches the snapshot 1`] = `
+<div
+  className="app-control"
+>
+  <HeaderBar
+    title=""
+  />
+  <InputFormContainer />
+</div>
+`;

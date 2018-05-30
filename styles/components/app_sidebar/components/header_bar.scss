@@ -1,9 +1,0 @@
-.header-bar {
-  @extend .navbar;
-  @extend .navbar-dark;
-  @extend .bg-primary;
-
-  @at-root &__title {
-    @extend .navbar-brand;
-  }
-}
