@@ -1,0 +1,111 @@
+$location-picker-list-item-padding-y: $input-padding-y;
+$location-picker-list-item-padding-x: $input-padding-x;
+$location-picker-list-item-line-height: $input-line-height;
+$location-picker-list-item-border-radius: $input-border-radius;
+
+$location-picker-list-item-color: $gray-700;
+$location-picker-list-item-bg: $gray-100;
+$location-picker-list-item-hover-bg: rgba($component-active-bg, .25);
+$location-picker-list-item-hover-color: $gray-700;
+$location-picker-list-item-active-bg: rgba($component-active-bg, .5);
+$location-picker-list-item-active-color: mix($gray-800, rgba($location-picker-list-item-active-bg, 0), 90%);
+$location-picker-list-item-selected-bg: rgba($component-active-bg, .125);
+$location-picker-list-item-selected-color: $gray-700;
+
+.location-picker {
+  @at-root &__label {
+    @extend small;
+    @extend .text-muted;
+
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+
+  @at-root &__label-text {
+    flex-grow: 1;
+    text-transform: uppercase;
+  }
+
+  @at-root &__label-accessory {
+    flex-grow: 0;
+    justify-self: end;
+    text-align: right;
+  }
+
+  @at-root &__list {
+    @extend .form-group;
+    padding-left: 0;
+    padding-right: 0;
+    list-style: none;
+  }
+
+  @at-root &__list-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: $location-picker-list-item-padding-y $location-picker-list-item-padding-x;
+    line-height: $location-picker-list-item-line-height;
+    color: $location-picker-list-item-color;
+    background-color: $location-picker-list-item-bg;
+    background-clip: padding-box;
+    border-radius: $location-picker-list-item-border-radius;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: flex-start;
+
+    &:hover {
+      color: $location-picker-list-item-hover-color;
+      background-color: $location-picker-list-item-hover-bg;
+    }
+
+    &:active {
+      color: $location-picker-list-item-active-color;
+      background-color: $location-picker-list-item-active-bg;
+    }
+
+    @at-root &--with-right-accessory {
+      padding-right: 2.25em;
+    }
+
+    @at-root &--selected {
+      color: $location-picker-list-item-selected-color;
+      background-color: $location-picker-list-item-selected-bg;
+    }
+
+    @at-root &-text {
+      flex-basis: 100%;
+    }
+
+    @at-root &-right-accessory {
+      $dimension: $location-picker-list-item-padding-y * 2 + ($font-size-base * $location-picker-list-item-line-height);
+
+      z-index: 4;
+      top: 0;
+      right: 0;
+      height: $dimension;
+      width: $dimension;
+      position: absolute;
+
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @at-root &-icon {
+      height: 1.1em;
+
+      img,
+      svg {
+        height: 100%;
+        width: auto;
+
+        fill: $gray-600;
+
+        &:hover {
+          fill: $gray-700;
+        }
+      }
+    }
+  }
+}

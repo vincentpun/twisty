@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --watch",
+    "test": "NODE_ENV=test jest --watchAll",
     "start": "NODE_ENV=development webpack-dev-server --mode development --hot"
   },
   "author": "",

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationPicker matches the snapshot 1`] = `
+<div
+  className="location-picker"
+>
+  <div
+    className="location-picker__label"
+  >
+    <span
+      className="location-picker__label-text"
+    >
+      Section title
+    </span>
+  </div>
+  <ul
+    className="location-picker__list"
+  >
+    <LocationPickerListItem
+      key="a"
+      onItemClick={null}
+      rightAccessoryRender={null}
+      title="Test"
+    />
+  </ul>
+</div>
+`;
