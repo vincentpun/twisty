@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DotenvPlugin = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -58,6 +59,9 @@ module.exports = {
       showErrors: true,
       path: path.join(__dirname, 'dist'),
       hash: true
+    }),
+    new DotenvPlugin({
+      safe: true,
     }),
   ]
 }
