@@ -43,7 +43,6 @@ $location-picker-list-item-selected-color: $gray-700;
     position: relative;
     display: block;
     width: 100%;
-    padding: $location-picker-list-item-padding-y $location-picker-list-item-padding-x;
     line-height: $location-picker-list-item-line-height;
     color: $location-picker-list-item-color;
     background-color: $location-picker-list-item-bg;
@@ -64,10 +63,6 @@ $location-picker-list-item-selected-color: $gray-700;
       background-color: $location-picker-list-item-active-bg;
     }
 
-    @at-root &--with-right-accessory {
-      padding-right: 2.25em;
-    }
-
     @at-root &--selected {
       color: $location-picker-list-item-selected-color;
       background-color: $location-picker-list-item-selected-bg;
@@ -75,6 +70,11 @@ $location-picker-list-item-selected-color: $gray-700;
 
     @at-root &-text {
       flex-basis: 100%;
+      padding: $location-picker-list-item-padding-y $location-picker-list-item-padding-x;
+    }
+
+    @at-root &--with-right-accessory &-text {
+      padding-right: 2.25em;
     }
 
     @at-root &-right-accessory {
