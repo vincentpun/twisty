@@ -13,7 +13,7 @@ const LocationPickerListItem = ({ title, active, onItemClick, rightAccessoryRend
     className={classNames(
       'location-picker__list-item',
       {
-        'location-picker__list-item--enabled': active,
+        'location-picker__list-item--selected': active,
         'location-picker__list-item--with-right-accessory': !!rightAccessoryRender,
       },
     )}
