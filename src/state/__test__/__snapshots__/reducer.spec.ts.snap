@@ -4,7 +4,11 @@ exports[`state matches the snapshot 1`] = `
 Object {
   "ui": Object {
     "appControl": Object {
+      "coordinates": Object {},
+      "hasFailedGrabbingClientLocation": false,
+      "isGrabbingClientLocation": false,
       "selection": null,
+      "startingCoordinates": null,
     },
   },
 }

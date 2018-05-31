@@ -1,9 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`appControl coordinates matches the snapshot 1`] = `null`;
+
+exports[`appControl hasFailedGrabbingClientLocation matches the snapshot 1`] = `false`;
+
+exports[`appControl isGrabbingClientLocation matches the snapshot 1`] = `false`;
+
 exports[`appControl matches the snapshot 1`] = `
 Object {
+  "coordinates": Object {},
+  "hasFailedGrabbingClientLocation": false,
+  "isGrabbingClientLocation": false,
   "selection": null,
+  "startingCoordinates": null,
 }
 `;
 
 exports[`appControl selection matches the snapshot 1`] = `null`;
+
+exports[`appControl startingCoordinates matches the snapshot 1`] = `null`;
+
+exports[`appControl startingCoordinates matches the snapshot 2`] = `null`;

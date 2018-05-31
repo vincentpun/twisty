@@ -1,14 +1,11 @@
 import * as React from 'react';
 
-import LocationPicker from './components/LocationPicker';
+import { StartingLocationPicker, LocationPicker } from './components';
 import { Trash } from 'src/components/Icons';
 
 const InputFormContainer = () => (
   <div className="app-control__input-form">
-    <LocationPicker
-      sectionTitle="Starting Location"
-      items={[]}
-    />
+    <StartingLocationPicker />
     <hr />
     <LocationPicker
       sectionTitle="Dropoff Locations"
