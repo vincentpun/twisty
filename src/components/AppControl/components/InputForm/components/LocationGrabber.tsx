@@ -22,12 +22,12 @@ const LocationGrabber = ({ isGrabbing, hasFailedGrabbingClientLocation, getClien
       <span>
         Failed
         {' '}
-        <a href="#" onClick={getClientLocation}>Retry</a>
+        <a href="#" onClick={e => {e.preventDefault(); getClientLocation();}}>Retry</a>
       </span>
     );
   }
 
-  return <a href="#" onClick={getClientLocation}>Get Location</a>;
+  return <a href="#" onClick={e => {e.preventDefault(); getClientLocation();}}>Get Location</a>;
 };
 
 const mapStateToProps = (state: State) => ({
