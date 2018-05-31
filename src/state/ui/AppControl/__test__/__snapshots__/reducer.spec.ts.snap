@@ -2,6 +2,8 @@
 
 exports[`appControl matches the snapshot 1`] = `
 Object {
-  "pickSession": null,
+  "selection": null,
 }
 `;
+
+exports[`appControl selection matches the snapshot 1`] = `null`;

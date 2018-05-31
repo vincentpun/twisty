@@ -1,6 +1,6 @@
 import appControl, * as reducer from '../reducer';
 import { AppControlUIActionTypes } from '../actionTypes';
-import { AppControlSession } from '../types';
+import { AppControlSelection, AppControlSelectionSection } from '../types';
 
 describe('appControl', () => {
   it('matches the snapshot', () => {
@@ -8,31 +8,30 @@ describe('appControl', () => {
     expect(state).toMatchSnapshot();
   });
 
-  describe('pickSession', () => {
+  describe('selection', () => {
     it('matches the snapshot', () => {
-      const state = reducer.pickSession(undefined, { type: null });
-      expect(state).toEqual(null);
+      const state = reducer.selection(undefined, { type: null, payload: null });
+      expect(state).toMatchSnapshot();
     });
 
-    it('handles AppControlUIActionTypes.PickSessionBegin', () => {
-      let state = reducer.pickSession(null, {
-        type: AppControlUIActionTypes.PickSessionBegin,
-        payload: AppControlSession.StartingPoint
-      });
-      expect(state).toEqual(AppControlSession.StartingPoint);
-
-      state = reducer.pickSession(AppControlSession.StartingPoint, {
-        type: AppControlUIActionTypes.PickSessionBegin,
-        payload: AppControlSession.EndingPoint
-      });
-      expect(state).toEqual(AppControlSession.EndingPoint);
-    });
-
-    it('handles AppControlUIActionTypes.PickSessionEnd', () => {
-      const state = reducer.pickSession(AppControlSession.EndingPoint, {
-        type: AppControlUIActionTypes.PickSessionEnd,
+    it('handles AppControlUIActionTypes.Select', () => {
+      let state = reducer.selection(AppControlSelectionSection.StartingLocation,{
+        type: AppControlUIActionTypes.Select,
+        payload: null,
       });
       expect(state).toEqual(null);
+
+      state = reducer.selection(null, {
+        type: AppControlUIActionTypes.Select,
+        payload: AppControlSelectionSection.StartingLocation,
+      });
+      expect(state).toEqual(AppControlSelectionSection.StartingLocation);
+
+      state = reducer.selection(null, {
+        type: AppControlUIActionTypes.Select,
+        payload: 'test',
+      });
+      expect(state).toEqual('test');
     });
   });
 });

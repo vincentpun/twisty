@@ -3,7 +3,7 @@
 exports[`ui matches the snapshot 1`] = `
 Object {
   "appControl": Object {
-    "pickSession": null,
+    "selection": null,
   },
 }
 `;

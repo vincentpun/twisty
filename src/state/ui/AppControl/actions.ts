@@ -1,16 +1,29 @@
 import { createAction, ActionUnion } from 'src/state/actions';
 import { AppControlUIActionTypes } from './actionTypes';
-import { AppControlSession } from './types';
+import { AppControlSelection, AppControlSelectionSection } from './types';
 
-export const beginSession = (session: AppControlSession) => createAction(
-    AppControlUIActionTypes.PickSessionBegin,
-    session,
-  );
-export const endSession = () => createAction(AppControlUIActionTypes.PickSessionEnd);
+export const beginPickSession = (section: AppControlSelectionSection) => createAction(
+  AppControlUIActionTypes.Select,
+  section,
+);
 
-const Actions = {
-  beginSession,
-  endSession,
+export const endPickSession = () => deselect();
+
+export const selectItem = (section: AppControlSelectionSection, id: string) => createAction(
+  AppControlUIActionTypes.Select,
+  id,
+);
+
+export const deselect = () => createAction(
+  AppControlUIActionTypes.Select,
+  null,
+);
+
+export const actions = {
+  beginPickSession,
+  endPickSession,
+  selectItem,
+  deselect,
 };
 
-export type Actions = ActionUnion<typeof Actions>;
+export type Actions = ActionUnion<typeof actions>;

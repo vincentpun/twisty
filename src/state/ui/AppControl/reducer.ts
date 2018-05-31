@@ -2,28 +2,26 @@ import { combineReducers } from 'redux';
 
 import { createAction } from 'src/state/actions';
 import { AppControlUIActionTypes } from './actionTypes';
-import { AppControlSession } from './types';
+import { AppControlSelection } from './types';
 import { Actions } from './actions';
 
 export interface AppControlUIState {
-  pickSession: AppControlSession;
+  selection: AppControlSelection;
 }
 
 const initialState: AppControlUIState = {
-  pickSession: null,
+  selection: null,
 };
 
-export const pickSession = (state = initialState.pickSession, action: Actions) => {
+export const selection = (state = initialState.selection, action: Actions) => {
   switch (action.type) {
-    case AppControlUIActionTypes.PickSessionBegin:
+    case AppControlUIActionTypes.Select:
       return action.payload;
-    case AppControlUIActionTypes.PickSessionEnd:
-      return null;
     default:
       return state;
   }
 }
 
 export default combineReducers<AppControlUIState>({
-  pickSession,
+  selection,
 });
