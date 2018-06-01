@@ -12,6 +12,7 @@ import MapMarker, { MapMarkerColor } from './MapMarker';
 import { selectItem, pickStartingLocation, deselect } from 'src/state/ui/AppControl/actions';
 import { grmCoordinatesToCoordinates, coordinatesToGRMCoordinates } from './utils/convertCoordinates';
 import * as Constants from './utils/constants';
+import PathDrawer from './PathDrawer';
 
 interface MapProps {
   className?: string;
@@ -28,12 +29,16 @@ interface MapState {
 }
 
 class Map extends React.Component<MapProps, MapState> {
+  private _map: any;
+  private _maps: any;
+
   constructor(props: MapProps) {
     super(props);
 
     this.handleChildClick = this.handleChildClick.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleMapLoad = this.handleMapLoad.bind(this);
 
     this.state = {
       center: Constants.DefaultCenter,
@@ -62,6 +67,14 @@ class Map extends React.Component<MapProps, MapState> {
     this.setState({
       center: grmCoordinatesToCoordinates(value.center),
     });
+  }
+
+  handleMapLoad(maps: { map: any, maps: any }) {
+    const { map, maps: gMaps } = maps;
+    this._map = map;
+    this._maps = gMaps;
+
+    this.forceUpdate();
   }
 
   componentDidUpdate(prevProps: MapProps, prevState: MapState) {
@@ -98,6 +111,8 @@ class Map extends React.Component<MapProps, MapState> {
           onChange={this.handleChange}
           onChildClick={this.handleChildClick}
           onClick={this.handleClick}
+          onGoogleApiLoaded={this.handleMapLoad}
+          yesIWantToUseGoogleMapApiInternals={true}
         >
           {
             !!startingCoordinates ?
@@ -111,6 +126,25 @@ class Map extends React.Component<MapProps, MapState> {
             null
           }
         </GoogleMapReact>
+
+        <PathDrawer
+          map={this._map}
+          maps={this._maps}
+          coordinates={[
+            {
+              latitude: 22.372081,
+              longitude: 114.107877,
+            },
+            {
+              latitude: 22.326442,
+              longitude: 114.167811,
+            },
+            {
+              latitude: 22.284419,
+              longitude: 114.159510,
+            }
+          ]}
+        />
       </div>
     );
   }
