@@ -21,7 +21,8 @@
     }
   }
 
-  @at-root &__input-form {
+  @at-root &__input-form,
+  &__route-control {
     overflow: auto;
     padding: 1em;
     flex-grow: 1;

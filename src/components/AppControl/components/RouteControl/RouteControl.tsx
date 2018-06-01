@@ -11,12 +11,14 @@ interface RouteControlProps {
 }
 
 const RouteControl = ({ switchMode }: RouteControlProps) => (
-  <button
-    onClick={(e) => { e.preventDefault(); switchMode(AppUIMode.AppControl); }}
-    className="app-control__switch-button"
-  >
-    Back
-  </button>
+  <div className="app-control__route-control">
+    <button
+      onClick={(e) => { e.preventDefault(); switchMode(AppUIMode.AppControl); }}
+      className="app-control__switch-button"
+    >
+      Back
+    </button>
+  </div>
 );
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
