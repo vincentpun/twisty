@@ -10,6 +10,7 @@ Object {
       "selection": null,
       "startingCoordinates": null,
     },
+    "mode": "appControl",
   },
 }
 `;

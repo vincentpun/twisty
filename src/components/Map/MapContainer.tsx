@@ -13,12 +13,15 @@ import { selectItem, pickStartingLocation, deselect } from 'src/state/ui/AppCont
 import { grmCoordinatesToCoordinates, coordinatesToGRMCoordinates } from './utils/convertCoordinates';
 import * as Constants from './utils/constants';
 import PathDrawer from './PathDrawer';
+import { getMode } from 'src/state/ui/selectors';
+import { AppUIMode } from '../../state/ui/reducer';
 
 interface MapProps {
   className?: string;
   startingCoordinates: MapCoordinatesMap;
   currentSelection: string | AppControlSelectionSection;
   currentSelectionCoordinates: MapCoordinatesMap;
+  mode: AppUIMode;
   selectMarker: (id: string) => any;
   pickStartingLocation: (coordinates: MapCoordinates) => any;
   deselect: () => any;
@@ -93,7 +96,7 @@ class Map extends React.Component<MapProps, MapState> {
   }
 
   render() {
-    const { className, startingCoordinates } = this.props;
+    const { className, startingCoordinates, mode } = this.props;
     const { center } = this.state;
 
     const mapCenter = coordinatesToGRMCoordinates(center);
@@ -127,24 +130,28 @@ class Map extends React.Component<MapProps, MapState> {
           }
         </GoogleMapReact>
 
-        <PathDrawer
-          map={this._map}
-          maps={this._maps}
-          coordinates={[
-            {
-              latitude: 22.372081,
-              longitude: 114.107877,
-            },
-            {
-              latitude: 22.326442,
-              longitude: 114.167811,
-            },
-            {
-              latitude: 22.284419,
-              longitude: 114.159510,
-            }
-          ]}
-        />
+        {
+          mode === AppUIMode.Route ?
+            <PathDrawer
+              map={this._map}
+              maps={this._maps}
+              coordinates={[
+                {
+                  latitude: 22.372081,
+                  longitude: 114.107877,
+                },
+                {
+                  latitude: 22.326442,
+                  longitude: 114.167811,
+                },
+                {
+                  latitude: 22.284419,
+                  longitude: 114.159510,
+                }
+              ]}
+            /> :
+            null
+        }
       </div>
     );
   }
@@ -154,6 +161,7 @@ const mapStateToProps = (state: State) => ({
   currentSelection: getCurrentSelection(state),
   startingCoordinates: getStartingCoordinates(state),
   currentSelectionCoordinates: getCoordinatesById(state, getCurrentSelection(state)),
+  mode: getMode(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

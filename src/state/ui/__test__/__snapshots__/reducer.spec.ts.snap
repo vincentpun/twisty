@@ -9,5 +9,8 @@ Object {
     "selection": null,
     "startingCoordinates": null,
   },
+  "mode": "appControl",
 }
 `;
+
+exports[`ui mode matches the snapshot 1`] = `"appControl"`;

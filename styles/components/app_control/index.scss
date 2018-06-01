@@ -4,6 +4,7 @@
   @extend .shadow-sm;
   padding-left: 0;
   padding-right: 0;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -23,5 +24,11 @@
   @at-root &__input-form {
     overflow: auto;
     padding: 1em;
+    flex-grow: 1;
+  }
+
+  @at-root &__switch-button {
+    @extend .btn;
+    @extend .btn-primary;
   }
 }
