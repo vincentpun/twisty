@@ -21,3 +21,5 @@ export const getStartingCoordinates = (state: State) => {
 };
 
 export const getCoordinates = (state: State) => values(state.ui.appControl.coordinates);
+
+export const getCoordinatesById = (state: State, id: string) => state.ui.appControl.coordinates[id];

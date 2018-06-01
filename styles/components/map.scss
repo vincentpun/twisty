@@ -1,0 +1,33 @@
+$map-marker-dimension: 40px;
+
+.map {
+  &__marker {
+    width: $map-marker-dimension;
+    height: $map-marker-dimension;
+    margin-left: -($map-marker-dimension / 2);
+    margin-top: -$map-marker-dimension;
+
+    svg, img {
+      width: 100%;
+      height: auto;
+    }
+
+    &--red {
+      svg {
+        fill: $red;
+      }
+    }
+
+    &--yellow {
+      svg {
+        fill: $yellow;
+      }
+    }
+
+    &--blue {
+      svg {
+        fill: $blue;
+      }
+    }
+  }
+}

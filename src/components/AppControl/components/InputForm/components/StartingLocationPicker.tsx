@@ -11,6 +11,7 @@ import { Trash } from 'src/components/Icons';
 import LocationGrabber from './LocationGrabber';
 import { MapCoordinatesMap, coordinates } from 'src/state/ui/AppControl/reducer';
 import { LocationPickerListItem } from './LocationPicker';
+import { formatCoordinates } from 'src/utils/formatCoordinates';
 
 interface StartingLocationPickerProps {
   selection: AppControlSelection;
@@ -19,6 +20,7 @@ interface StartingLocationPickerProps {
   beginPickSession: (section: AppControlSelectionSection) => any;
   endPickSession: () => any;
   selectItem: (id: string) => any;
+  deselect: () => any;
   removeCoordinates: (coordinates: MapCoordinatesMap) => any;
 }
 
@@ -29,6 +31,7 @@ const StartingLocationPicker = ({
   beginPickSession,
   endPickSession,
   selectItem,
+  deselect,
   removeCoordinates,
 }: StartingLocationPickerProps) => {
   let item: LocationPickerListItem;
@@ -43,7 +46,7 @@ const StartingLocationPicker = ({
     if (!!coordinates) {
       item = {
         key: 'coordinates',
-        title: `${coordinates.latitude}, ${coordinates.longitude}`,
+        title: formatCoordinates(coordinates),
         active: selection === coordinates.id,
         rightAccessoryRender: () => <span onClick={e => {e.preventDefault(); removeCoordinates(coordinates);}}><Trash /></span>,
       };
@@ -63,13 +66,20 @@ const StartingLocationPicker = ({
         () => {
           if (isPicking) {
             endPickSession();
-          } else {
-            if (!!coordinates) {
-              selectItem(coordinates.id);
-            } else {
-              beginPickSession(AppControlSelectionSection.StartingLocation);
-            }
+            return;
           }
+
+          if (!!selection && !!coordinates) {
+            deselect();
+            return;
+          }
+
+          if (!!coordinates) {
+            selectItem(coordinates.id);
+            return;
+          }
+
+          beginPickSession(AppControlSelectionSection.StartingLocation);
         }
       }
       titleAccessoryRender={() =>
@@ -89,6 +99,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   beginPickSession: actions.beginPickSession,
   endPickSession: actions.endPickSession,
   selectItem: actions.selectItem,
+  deselect: actions.deselect,
   removeCoordinates: actions.removeCoordinates,
 }, dispatch);
 
