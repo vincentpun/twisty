@@ -10,6 +10,9 @@ Object {
     "startingCoordinates": null,
   },
   "mode": "appControl",
+  "routes": Object {
+    "query": null,
+  },
 }
 `;
 

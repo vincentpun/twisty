@@ -1,18 +1,23 @@
 import * as React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { isNil } from 'ramda';
 
 import { StartingLocationPicker, LocationPicker } from './components';
 import { Trash } from 'src/components/Icons';
-import { AppUIMode } from '../../../../state/ui/reducer';
+import { AppUIMode } from 'src/state/ui/reducer';
 import { switchMode } from 'src/state/ui/actions';
+import { State } from 'src/state/reducer';
+import { getStartingCoordinates } from 'src/state/ui/AppControl/selectors';
+import { MapCoordinatesMap } from 'src/state/ui/AppControl/reducer';
 
 interface InputFormContainerProps {
   switchMode: (mode: AppUIMode) => any;
+  startingCoordinates?: MapCoordinatesMap;
 }
 
-const InputFormContainer = ({ switchMode }: InputFormContainerProps) => (
-  <div className="app-control__input-form">
+const InputFormContainer = ({ switchMode, startingCoordinates }: InputFormContainerProps) => (
+  <div>
     <StartingLocationPicker />
     <hr />
     <LocationPicker
@@ -21,7 +26,13 @@ const InputFormContainer = ({ switchMode }: InputFormContainerProps) => (
     />
     <hr />
     <button
-      onClick={(e) => { e.preventDefault(); switchMode(AppUIMode.Route); }}
+      disabled={isNil(startingCoordinates)}
+      onClick={
+        (e) => {
+          e.preventDefault();
+          switchMode(AppUIMode.Route);
+        }
+      }
       className="app-control__switch-button"
     >
       Route
@@ -29,8 +40,12 @@ const InputFormContainer = ({ switchMode }: InputFormContainerProps) => (
   </div>
 );
 
+const mapStateToProps = (state: State) => ({
+  startingCoordinates: getStartingCoordinates(state),
+});
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   switchMode: (mode: AppUIMode) => dispatch(switchMode(mode)),
 });
 
-export default connect(null, mapDispatchToProps)(InputFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(InputFormContainer);

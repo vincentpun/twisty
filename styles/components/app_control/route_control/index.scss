@@ -1,0 +1,42 @@
+@import 'components/index';
+
+.route-control {
+  @at-root &__loading {
+    position: relative;
+    pointer-events: none;
+    user-select: none;
+    color: transparent !important;
+
+    display: block;
+    min-height: 4em;
+
+    &:after {
+      @keyframes spinAround {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(359deg);
+        }
+      }
+
+      animation: spinAround 800ms infinite linear;
+      border-radius: 999999px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: transparent transparent $primary $primary;
+      width: 2em;
+      height: 2em;
+      left: calc(50% - (2em / 2));
+      top: calc(50% - (2em / 2));
+      position: absolute;
+      display: block;
+      content: '';
+    }
+  }
+
+  @at-root &__back-button {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+}

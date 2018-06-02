@@ -1,0 +1,20 @@
+.error-message {
+  @extend .alert;
+  @extend .alert-danger;
+
+  @at-root &__title {
+    @extend h4;
+    @extend .alert-heading;
+  }
+
+  @at-root &__text {
+    @at-root &--last-line {
+      @extend .mb-0;
+    }
+  }
+
+  @at-root &__button {
+    @extend .btn;
+    @extend .btn-secondary;
+  }
+}

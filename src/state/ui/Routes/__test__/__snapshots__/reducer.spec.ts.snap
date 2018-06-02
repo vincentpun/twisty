@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes matches the snapshot 1`] = `
+Object {
+  "query": null,
+}
+`;
+
+exports[`routes query matches the snapshot 1`] = `
+Object {
+  "query": null,
+}
+`;

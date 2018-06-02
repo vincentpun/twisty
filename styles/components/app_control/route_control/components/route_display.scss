@@ -1,0 +1,12 @@
+.route-display {
+  @at-root &__statistic {
+    font-size: $font-size-base * 2;
+  }
+
+  @at-root &__statistic-label {
+    @extend small;
+    @extend .text-muted;
+
+    font-size: $font-size-sm;
+  }
+}

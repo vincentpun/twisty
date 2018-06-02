@@ -1,4 +1,5 @@
 @import 'location_picker';
+@import 'route_control/index';
 
 .app-control {
   @extend .shadow-sm;
@@ -21,8 +22,7 @@
     }
   }
 
-  @at-root &__input-form,
-  &__route-control {
+  @at-root &__content {
     overflow: auto;
     padding: 1em;
     flex-grow: 1;

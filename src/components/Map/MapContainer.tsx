@@ -14,7 +14,9 @@ import { grmCoordinatesToCoordinates, coordinatesToGRMCoordinates } from './util
 import * as Constants from './utils/constants';
 import PathDrawer from './PathDrawer';
 import { getMode } from 'src/state/ui/selectors';
-import { AppUIMode } from '../../state/ui/reducer';
+import { AppUIMode } from 'src/state/ui/reducer';
+import { getCurrentRouteQuery } from 'src/state/ui/Routes/selectors';
+import { RouteQuery } from 'src/state/routes/reducer';
 
 interface MapProps {
   className?: string;
@@ -25,6 +27,7 @@ interface MapProps {
   selectMarker: (id: string) => any;
   pickStartingLocation: (coordinates: MapCoordinates) => any;
   deselect: () => any;
+  query: RouteQuery;
 }
 
 interface MapState {
@@ -96,7 +99,7 @@ class Map extends React.Component<MapProps, MapState> {
   }
 
   render() {
-    const { className, startingCoordinates, mode } = this.props;
+    const { className, startingCoordinates, mode, query } = this.props;
     const { center } = this.state;
 
     const mapCenter = coordinatesToGRMCoordinates(center);
@@ -118,7 +121,7 @@ class Map extends React.Component<MapProps, MapState> {
           yesIWantToUseGoogleMapApiInternals={true}
         >
           {
-            !!startingCoordinates ?
+            !!startingCoordinates && mode !== AppUIMode.Route ?
             <MapMarker
               key={startingCoordinates.id}
               color={MapMarkerColor.Red}
@@ -131,24 +134,11 @@ class Map extends React.Component<MapProps, MapState> {
         </GoogleMapReact>
 
         {
-          mode === AppUIMode.Route ?
+          mode === AppUIMode.Route && !!query && !!query.response ?
             <PathDrawer
               map={this._map}
               maps={this._maps}
-              coordinates={[
-                {
-                  latitude: 22.372081,
-                  longitude: 114.107877,
-                },
-                {
-                  latitude: 22.326442,
-                  longitude: 114.167811,
-                },
-                {
-                  latitude: 22.284419,
-                  longitude: 114.159510,
-                }
-              ]}
+              coordinates={query.response.waypoints}
             /> :
             null
         }
@@ -161,6 +151,7 @@ const mapStateToProps = (state: State) => ({
   currentSelection: getCurrentSelection(state),
   startingCoordinates: getStartingCoordinates(state),
   currentSelectionCoordinates: getCoordinatesById(state, getCurrentSelection(state)),
+  query: getCurrentRouteQuery(state),
   mode: getMode(state),
 });
 

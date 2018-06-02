@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
 import appControl, { AppControlUIState } from './AppControl/reducer';
+import routes, { RoutesState } from './Routes/reducer';
 import { Actions } from './actions';
 import { AppUIActionTypes } from './actionTypes';
 
 export interface UIState {
   mode: Readonly<AppUIMode>,
+  routes: Readonly<RoutesState>,
   appControl: Readonly<AppControlUIState>,
 }
 
@@ -25,5 +27,6 @@ export const mode = (state = AppUIMode.AppControl, action: Actions) => {
 
 export default combineReducers<UIState>({
   appControl,
+  routes,
   mode,
 });

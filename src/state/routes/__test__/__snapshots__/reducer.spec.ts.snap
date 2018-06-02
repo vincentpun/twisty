@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes reducer matches the snapshot 1`] = `
+Object {
+  "queries": Object {},
+}
+`;
+
+exports[`routes reducer queries matches the snapshot 1`] = `Object {}`;

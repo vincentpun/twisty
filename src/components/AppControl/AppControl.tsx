@@ -19,13 +19,15 @@ interface AppControlProps {
 const AppControl = ({ children, productName, mode, className }: AppControlProps) => (
   <div className={classNames('app-control', className)}>
     <HeaderBar title={productName} />
-    {
-      mode === AppUIMode.AppControl ?
-        <InputFormContainer /> :
-        mode === AppUIMode.Route ?
-          <RouteControl /> :
-          null
-    }
+    <div className="app-control__content">
+      {
+        mode === AppUIMode.AppControl ?
+          <InputFormContainer /> :
+          mode === AppUIMode.Route ?
+            <RouteControl /> :
+            null
+      }
+    </div>
   </div>
 );
 
