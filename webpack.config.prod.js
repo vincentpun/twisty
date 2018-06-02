@@ -83,7 +83,9 @@ module.exports = {
       canPrint: true
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': 'production',
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -99,7 +101,13 @@ module.exports = {
 
   optimization: {
     minimizer: [
-      new UglifyJSPlugin(),
+      new UglifyJSPlugin({
+        uglifyOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }),
     ]
   },
 }
