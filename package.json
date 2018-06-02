@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test jest --watchAll",
-    "start": "NODE_ENV=development webpack-dev-server --mode development --hot"
+    "start": "NODE_ENV=development webpack-dev-server --mode development --hot",
+    "build": "NODE_ENV=production webpack --config webpack.config.prod.js --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -47,7 +48,10 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.0.0",
+    "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
+    "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.1",
     "scriptjs": "^2.5.8",
     "source-map-loader": "^0.2.3",
@@ -56,6 +60,7 @@
     "tslint-config-airbnb": "^5.9.2",
     "tslint-react": "^3.6.0",
     "typescript": "^2.8.3",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
