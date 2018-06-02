@@ -46,11 +46,16 @@ export const getClientLocation = () => async (dispatch: Dispatch) => {
   }
 };
 
+export const addDropoffCoordinates = (coordinates: MapCoordinates) =>
+  createAction(AppControlUIActionTypes.AddDropoffLocation, {
+    id: uuid(),
+    ...coordinates,
+  } as MapCoordinatesMap);
+
 export const pickStartingLocation = (coordinates: MapCoordinates) =>
   createAction(AppControlUIActionTypes.PickStartingPoint, {
     id: uuid(),
-    latitude: coordinates.latitude,
-    longitude: coordinates.longitude,
+    ...coordinates,
   } as MapCoordinatesMap);
 
 export const removeCoordinates = (coordinates: MapCoordinatesMap) =>
@@ -61,6 +66,7 @@ export const actions = {
   endPickSession,
   selectItem,
   deselect,
+  addDropoffCoordinates,
   pickStartingLocation,
   removeCoordinates,
 };

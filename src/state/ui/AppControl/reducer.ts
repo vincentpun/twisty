@@ -1,4 +1,4 @@
-import { omit } from 'ramda';
+import { omit, without } from 'ramda';
 import { combineReducers } from 'redux';
 
 import { createAction } from 'src/state/actions';
@@ -15,9 +15,10 @@ export interface AppControlUIState {
   isGrabbingClientLocation: Readonly<boolean>;
   hasFailedGrabbingClientLocation: Readonly<boolean>;
   startingCoordinates: Readonly<string>;
-  coordinates: {
+  dropoffCoordinates: ReadonlyArray<string>;
+  coordinates: Readonly<{
     [id: string]: MapCoordinatesMap,
-  };
+  }>;
 }
 
 const initialState: AppControlUIState = {
@@ -25,6 +26,7 @@ const initialState: AppControlUIState = {
   isGrabbingClientLocation: false,
   hasFailedGrabbingClientLocation: false,
   startingCoordinates: null,
+  dropoffCoordinates: [],
   coordinates: {},
 };
 
@@ -74,15 +76,28 @@ export const startingCoordinates = (state = initialState.startingCoordinates, ac
   }
 }
 
+export const dropoffCoordinates = (state = initialState.dropoffCoordinates, action: Actions) => {
+  switch (action.type) {
+    case AppControlUIActionTypes.AddDropoffLocation:
+      return state.concat([action.payload.id]);
+    case AppControlUIActionTypes.RemoveCoordinates:
+      return without([action.payload.id], state);
+    default:
+      return state;
+  }
+}
+
 export const coordinates = (state = initialState.coordinates, action: Actions) => {
   switch (action.type) {
     case AppControlUIActionTypes.PickStartingPoint:
     case AppControlUIActionTypes.FetchClientLocationReceive:
+    case AppControlUIActionTypes.AddDropoffLocation: {
       const map = action.payload;
       return {
         ...state,
         [map.id]: map,
       };
+    }
     case AppControlUIActionTypes.RemoveCoordinates:
       return omit([action.payload.id], state);
     default:
@@ -95,5 +110,6 @@ export default combineReducers<AppControlUIState>({
   isGrabbingClientLocation,
   hasFailedGrabbingClientLocation,
   startingCoordinates,
+  dropoffCoordinates,
   coordinates,
 });

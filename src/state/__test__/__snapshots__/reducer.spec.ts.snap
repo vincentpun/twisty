@@ -8,6 +8,7 @@ Object {
   "ui": Object {
     "appControl": Object {
       "coordinates": Object {},
+      "dropoffCoordinates": Array [],
       "hasFailedGrabbingClientLocation": false,
       "isGrabbingClientLocation": false,
       "selection": null,

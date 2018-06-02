@@ -147,6 +147,31 @@ describe('AppControl selectors', () => {
     });
   });
 
+  describe('getDropoffCoordinates', () => {
+    it('returns dropoff coordinates', () => {
+      const state: RecursivePartial<State> = {
+        ui: {
+          appControl: {
+            coordinates: {
+              a: {
+                id: 'a',
+              },
+              b: {
+                id: 'b',
+              },
+            },
+            dropoffCoordinates: ['a'],
+          },
+        },
+      };
+
+      const coordinates = selectors.getDropoffCoordinates(state as State);
+      expect(coordinates).toContainEqual({
+        id: 'a',
+      });
+    });
+  });
+
   describe('getCoordinates', () => {
     it('returns all coordinates', () => {
       const state: RecursivePartial<State> = {
@@ -154,10 +179,10 @@ describe('AppControl selectors', () => {
           appControl: {
             coordinates: {
               a: {
-                id: 'test',
+                id: 'a',
               },
               b: {
-                id: 'test2',
+                id: 'b',
               },
             },
           },
@@ -166,11 +191,35 @@ describe('AppControl selectors', () => {
 
       let coordinates = selectors.getCoordinates(state as State);
       expect(coordinates).toContainEqual({
-        id: 'test',
+        id: 'a',
       });
       expect(coordinates).toContainEqual({
-        id: 'test2',
+        id: 'b',
       });
     });
   });
+
+  describe('getCoordinatesById', () => {
+    it('returns coordinates by ID', () => {
+      const state: RecursivePartial<State> = {
+        ui: {
+          appControl: {
+            coordinates: {
+              a: {
+                id: 'a',
+              },
+            },
+          },
+        },
+      };
+
+      let coordinates = selectors.getCoordinatesById(state as State, 'a');
+      expect(coordinates).toEqual({
+        id: 'a',
+      });
+
+      coordinates = selectors.getCoordinatesById(state as State, 'b');
+      expect(coordinates).toBeUndefined();
+    });
+  })
 });

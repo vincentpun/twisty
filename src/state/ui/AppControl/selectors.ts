@@ -20,6 +20,9 @@ export const getStartingCoordinates = (state: State) => {
   return !!coordinates ? state.ui.appControl.coordinates[coordinates] : null;
 };
 
+export const getDropoffCoordinates = (state: State) =>
+  state.ui.appControl.dropoffCoordinates.map(dc => getCoordinatesById(state, dc));
+
 export const getCoordinates = (state: State) => values(state.ui.appControl.coordinates);
 
 export const getCoordinatesById = (state: State, id: string) => state.ui.appControl.coordinates[id];

@@ -9,7 +9,7 @@ import { switchMode } from 'src/state/ui/actions';
 import QueryRoute from './components/QueryRoute';
 import { State } from 'src/state/reducer';
 import { getCurrentRouteQuery } from 'src/state/ui/Routes/selectors';
-import { getStartingCoordinates } from 'src/state/ui/AppControl/selectors';
+import { getStartingCoordinates, getDropoffCoordinates } from 'src/state/ui/AppControl/selectors';
 import { MapCoordinatesMap, startingCoordinates } from 'src/state/ui/AppControl/reducer';
 import { createQuery, queryRoutes } from 'src/state/routes/actions';
 import { MapCoordinates } from 'src/state/ui/AppControl/types';
@@ -21,6 +21,7 @@ interface RouteControlProps {
   switchMode?: (mode: AppUIMode) => any;
   createQuery?: () => any;
   startingCoordinates?: MapCoordinatesMap;
+  dropoffCoordinates?: MapCoordinatesMap[];
   queryRoutes?: (id: string, startingCoordinates: MapCoordinates, dropoffCoordinates: MapCoordinates[]) => any;
   query?: RouteQuery;
 }
@@ -38,14 +39,14 @@ class RouteControl extends React.Component<RouteControlProps> {
 
   componentDidUpdate(prevProps: RouteControlProps) {
     const { query: oldQuery } = prevProps;
-    const { query, startingCoordinates } = this.props;
+    const { query, startingCoordinates, dropoffCoordinates } = this.props;
 
     const areDifferentQueries = (!isNil(oldQuery) && !isNil(query) && oldQuery.id !== query.id) ||
       (!isNil(oldQuery) && isNil(query)) ||
       (isNil(oldQuery) && !isNil(query));
 
     if (!!query && areDifferentQueries) {
-      !!this.props.queryRoutes ? this.props.queryRoutes(query.id, startingCoordinates, []) : null;
+      !!this.props.queryRoutes ? this.props.queryRoutes(query.id, startingCoordinates, dropoffCoordinates) : null;
     }
   }
 
@@ -106,6 +107,7 @@ class RouteControl extends React.Component<RouteControlProps> {
 const mapStateToProps = (state: State) => ({
   query: getCurrentRouteQuery(state),
   startingCoordinates: getStartingCoordinates(state),
+  dropoffCoordinates: getDropoffCoordinates(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

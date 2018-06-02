@@ -9,6 +9,7 @@ exports[`appControl isGrabbingClientLocation matches the snapshot 1`] = `false`;
 exports[`appControl matches the snapshot 1`] = `
 Object {
   "coordinates": Object {},
+  "dropoffCoordinates": Array [],
   "hasFailedGrabbingClientLocation": false,
   "isGrabbingClientLocation": false,
   "selection": null,

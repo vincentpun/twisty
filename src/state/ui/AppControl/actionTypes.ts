@@ -8,4 +8,6 @@ export enum AppControlUIActionTypes {
 
   PickStartingPoint = 'APP_CONTROL_PICK_STARTING_POINT',
   RemoveCoordinates = 'APP_CONTROL_REMOVE_COORDINATES',
+
+  AddDropoffLocation = 'APP_CONTROL_ADD_DROPOFF_LOCATION',
 }

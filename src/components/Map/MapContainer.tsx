@@ -6,10 +6,10 @@ import GoogleMapReact, { ClickEventValue, ChangeEventValue } from 'google-map-re
 
 import { MapCoordinates, AppControlSelectionSection } from 'src/state/ui/AppControl/types';
 import { State } from 'src/state/reducer';
-import { getStartingCoordinates, getCurrentSelection, getCoordinatesById } from 'src/state/ui/AppControl/selectors';
+import { getStartingCoordinates, getCurrentSelection, getCoordinatesById, getDropoffCoordinates } from 'src/state/ui/AppControl/selectors';
 import { MapCoordinatesMap, startingCoordinates } from 'src/state/ui/AppControl/reducer';
 import MapMarker, { MapMarkerColor } from './MapMarker';
-import { selectItem, pickStartingLocation, deselect } from 'src/state/ui/AppControl/actions';
+import { selectItem, pickStartingLocation, deselect, addDropoffCoordinates } from 'src/state/ui/AppControl/actions';
 import { grmCoordinatesToCoordinates, coordinatesToGRMCoordinates } from './utils/convertCoordinates';
 import * as Constants from './utils/constants';
 import PathDrawer from './PathDrawer';
@@ -17,15 +17,18 @@ import { getMode } from 'src/state/ui/selectors';
 import { AppUIMode } from 'src/state/ui/reducer';
 import { getCurrentRouteQuery } from 'src/state/ui/Routes/selectors';
 import { RouteQuery } from 'src/state/routes/reducer';
+import { getMarkerColor } from './utils/getMarkerColor';
 
 interface MapProps {
   className?: string;
   startingCoordinates: MapCoordinatesMap;
+  dropoffCoordinates: MapCoordinatesMap[];
   currentSelection: string | AppControlSelectionSection;
   currentSelectionCoordinates: MapCoordinatesMap;
   mode: AppUIMode;
   selectMarker: (id: string) => any;
   pickStartingLocation: (coordinates: MapCoordinates) => any;
+  addDropoffCoordinates: (coordinates: MapCoordinates) => any;
   deselect: () => any;
   query: RouteQuery;
 }
@@ -52,13 +55,15 @@ class Map extends React.Component<MapProps, MapState> {
   }
 
   handleClick(value: ClickEventValue) {
-    const { currentSelection, pickStartingLocation, deselect } = this.props;
+    const { currentSelection, pickStartingLocation, addDropoffCoordinates, deselect } = this.props;
 
     const coordinates = grmCoordinatesToCoordinates(value);
 
     if (currentSelection === AppControlSelectionSection.StartingLocation) {
       pickStartingLocation(coordinates);
       deselect();
+    } else if (currentSelection === AppControlSelectionSection.DropoffPoints) {
+      addDropoffCoordinates(coordinates);
     }
   }
 
@@ -99,7 +104,7 @@ class Map extends React.Component<MapProps, MapState> {
   }
 
   render() {
-    const { className, startingCoordinates, mode, query } = this.props;
+    const { className, startingCoordinates, dropoffCoordinates, mode, query, currentSelection } = this.props;
     const { center } = this.state;
 
     const mapCenter = coordinatesToGRMCoordinates(center);
@@ -124,11 +129,24 @@ class Map extends React.Component<MapProps, MapState> {
             !!startingCoordinates && mode !== AppUIMode.Route ?
             <MapMarker
               key={startingCoordinates.id}
-              color={MapMarkerColor.Red}
+              color={getMarkerColor(AppControlSelectionSection.StartingLocation)}
               lat={startingCoordinates.latitude}
               lng={startingCoordinates.longitude}
               id={startingCoordinates.id}
             /> :
+            null
+          }
+          {
+            dropoffCoordinates.length > 0 && mode !== AppUIMode.Route ?
+            dropoffCoordinates.map(dc => (
+              <MapMarker
+                key={dc.id}
+                color={getMarkerColor(AppControlSelectionSection.DropoffPoints)}
+                lat={dc.latitude}
+                lng={dc.longitude}
+                id={dc.id}
+              />
+            )) :
             null
           }
         </GoogleMapReact>
@@ -152,12 +170,14 @@ const mapStateToProps = (state: State) => ({
   startingCoordinates: getStartingCoordinates(state),
   currentSelectionCoordinates: getCoordinatesById(state, getCurrentSelection(state)),
   query: getCurrentRouteQuery(state),
+  dropoffCoordinates: getDropoffCoordinates(state),
   mode: getMode(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   selectMarker: (id: string) => dispatch(selectItem(id)),
   pickStartingLocation: (coordinates: MapCoordinates) => dispatch(pickStartingLocation(coordinates)),
+  addDropoffCoordinates: (coordinates: MapCoordinates) => dispatch(addDropoffCoordinates(coordinates)),
   deselect: () => dispatch(deselect()),
 });
 
